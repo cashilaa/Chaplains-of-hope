@@ -42,7 +42,9 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-gray-100">
       <header className="bg-white shadow-md py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-green-700">Chaplains of Hope</h1>
+          <div className="flex items-center">
+            <Image src="/logo.png" alt="Logo" width={120} height={120} className="mr-2 transform scale-150" />
+          </div>
           <nav className="hidden md:flex space-x-4">
             <Link href="/about" className="hover:text-red-500 transition-colors">
               About Us
