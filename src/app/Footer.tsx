@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer">
       <p>Contact us: info@chaplainsofhope.org</p>
       <p>Follow us on social media:</p>
-      <a href="#">Facebook</a>
+      <a href="https://www.facebook.com/muthioram.kuria/">Facebook</a>
       <a href="#">Twitter</a>
       <a href="#">Instagram</a>
       <p>“Never Walk Alone”</p>

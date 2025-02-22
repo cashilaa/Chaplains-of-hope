@@ -10,9 +10,9 @@ export default function Home() {
   const [currentProgram, setCurrentProgram] = useState(0)
 
   const testimonials = [
-    { name: "John Doe", text: "Chaplains of Hope changed my life...", image: "/testimonial1.jpg" },
-    { name: "Jane Smith", text: "I'm grateful for the support I received...", image: "/testimonial2.jpg" },
-    { name: "Mike Johnson", text: "The programs offered here are incredible...", image: "/testimonial3.jpg" },
+    { name: "John Doe", text: "Chaplains of Hope changed my life...", image: "/muthiora.jpg" },
+    { name: "Jane Smith", text: "I'm grateful for the support I received...", image: "/muthiora.jpg" },
+    { name: "Mike Johnson", text: "The programs offered here are incredible and really supportive", image: "/muthiora.jpg" },
   ]
 
   const programs = [
@@ -267,7 +267,7 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="#" className="hover:text-gray-300">
+                <a href="https://www.facebook.com/muthioram.kuria/" className="hover:text-gray-300">
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">

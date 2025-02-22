@@ -10,9 +10,9 @@ export default function Programs() {
       image: "/chaplaincy.jpg",
     },
     {
-      title: "Prison Visitations & Reintegration Support",
-      description: "Assisting inmates and ex-convicts in their journey towards rehabilitation and reintegration.",
-      image: "/prison-support.jpg",
+      title: "Reintegration Support",
+      description: "collaboration with Kabiria Reformed Boys, continues to grow and make a lasting impact each day. Transformation is not a one-time event but an ongoing process that requires dedication and commitment.",
+      image: "/collabo-support.jpg",
     },
     {
       title: "Boy Child Advocacy & Contact Tracing",
@@ -29,6 +29,11 @@ export default function Programs() {
       description: "Providing legal assistance and education to underserved communities.",
       image: "/legal-aid.jpg",
     },
+    {
+        title: "Vacation camps ",
+        description: "Adventure with relaxation of minds and uniting the society.",
+        image: "/fun.jpg",
+      },
   ]
 
   return (
