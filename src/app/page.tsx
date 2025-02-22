@@ -227,9 +227,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-              <p>123 Hope Street, City, Country</p>
-              <p>Phone: (123) 456-7890</p>
-              <p>Email: info@chaplainsofhope.org</p>
+              <p>00100 Muslim, Kawangware, Nairobi</p>
+              <p>Phone: (+245) 728620614/ 100546840</p>
+              <p>Email: chaplinofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -282,7 +282,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 text-center">
-            <p>&copy; 2023 Chaplains of Hope. All rights reserved.</p>
+            <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
             <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
