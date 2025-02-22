@@ -1,6 +1,5 @@
 "use client";
 import Head from 'next/head';
-import Image from 'next/image';
 import { useState } from 'react';
 import { CreditCard, DollarSign, Gift } from 'lucide-react';
 

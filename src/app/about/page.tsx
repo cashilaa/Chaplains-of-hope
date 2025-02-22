@@ -1,7 +1,6 @@
 "use client";
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -35,7 +34,7 @@ export default function About() {
         <section className="relative h-[50vh] bg-cover bg-center flex items-center justify-center" style={{backgroundImage: "url('/about-hero.jpg')"}}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">"Inspiring Hope, Changing Lives"</h1>
+<h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">"Inspiring Hope, Changing Lives"</h1>
           </div>
         </section>
 
@@ -48,12 +47,12 @@ export default function About() {
                 <Image src="/who-we-are.jpg" alt="Who We Are" width={500} height={300} className="rounded-lg shadow-md" />
               </div>
               <div className="md:w-1/2 md:pl-8">
-                <p className="text-gray-600 mb-4 animate-fade-in">
+<p className="text-gray-600 mb-4 animate-fade-in">
                   Chaplains of Hope is a non-profit organization dedicated to providing support and hope to those in need. 
                   Founded in 2000, we have been serving our community for over two decades, offering various programs and 
                   services aimed at improving lives and fostering positive change.
                 </p>
-                <p className="text-gray-600 animate-fade-in animation-delay-300">
+<p className="text-gray-600 animate-fade-in animation-delay-300">
                   Our team of dedicated professionals and volunteers work tirelessly to create a positive impact in areas 
                   such as reintegration, children's rights advocacy, community paralegal services, and disaster management.
                 </p>

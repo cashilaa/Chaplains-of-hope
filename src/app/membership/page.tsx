@@ -55,7 +55,7 @@ const handlePlanSelection = (planName: string) => {
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Join Our Community</h1>
-            <p className="text-xl md:text-2xl animate-fade-in animation-delay-300">Become a member and make a lasting impact</p>
+<p className="text-xl md:text-2xl animate-fade-in animation-delay-300">Become a member and make a lasting impact</p>
           </div>
         </section>
 
@@ -118,7 +118,7 @@ const handlePlanSelection = (planName: string) => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-8 text-green-700">Ready to Make a Difference?</h2>
-            <p className="text-xl text-gray-600 mb-8">Join our community today and help us create positive change.</p>
+<p className="text-xl text-gray-600 mb-8">Join our community today and help us create positive change.</p>
             <button className="bg-green-600 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors">
               Become a Member
             </button>

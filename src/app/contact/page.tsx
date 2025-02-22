@@ -35,8 +35,8 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         <section className="relative h-[50vh] bg-cover bg-center flex items-center justify-center" style={{backgroundImage: "url('/contact-hero.jpg')"}}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Let's Connect</h1>
-            <p className="text-xl md:text-2xl animate-fade-in animation-delay-300">We're here to answer your questions and hear your thoughts</p>
+<h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Let's Connect</h1>
+<p className="text-xl md:text-2xl animate-fade-in animation-delay-300">We're here to answer your questions and hear your thoughts</p>
           </div>
         </section>
 

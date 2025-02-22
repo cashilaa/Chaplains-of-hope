@@ -75,7 +75,7 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Inspiring Hope, Changing Lives</h2>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">"Inspiring Hope, Changing Lives"</h2>
             <p className="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-300">
               Join us in making a difference in our community
             </p>
@@ -288,4 +288,3 @@ export default function Home() {
     </div>
   )
 }
-

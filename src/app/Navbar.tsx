@@ -1,16 +1,17 @@
 import React from 'react';
 import './globals.css';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <a href="/" className="active">Home</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/programs">Programs</a>
-      <a href="/donations">Donations</a>
-      <a href="/membership">Membership</a>
-      <a href="/news">News</a>
+<Link href="/" className="active">Home</Link>
+<Link href="/about">About</Link>
+<Link href="/contact">Contact</Link>
+<Link href="/programs">Programs</Link>
+<Link href="/donations">Donations</Link>
+<Link href="/membership">Membership</Link>
+<Link href="/news">News</Link>
     </nav>
   );
 };
