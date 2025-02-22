@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
-import { Search } from "lucide-react"
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Search } from "lucide-react";
 
 export default function News() {
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState("");
 
   const featuredNews = [
     {
@@ -31,7 +31,7 @@ export default function News() {
       excerpt:
         "In an effort to reach more individuals in need, we are excited to announce the expansion of our services to rural communities...",
     },
-  ]
+  ];
 
   const latestUpdates = [
     {
@@ -59,17 +59,17 @@ export default function News() {
       date: "May 20, 2023",
       category: "Awards",
     },
-  ]
+  ];
 
-const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-  }
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   const filteredUpdates = latestUpdates.filter(
     (update) =>
       update.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      update.category.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+      update.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -269,10 +269,10 @@ const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">"You Will Never Walk Alone"</p>
+            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }

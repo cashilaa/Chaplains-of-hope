@@ -237,7 +237,7 @@ export default function Membership() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">"You Will Never Walk Alone"</p>
+            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
       </footer>

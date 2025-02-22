@@ -1,6 +1,6 @@
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Programs() {
   const programs = [
@@ -30,11 +30,11 @@ export default function Programs() {
       image: "/legal-aid.jpg",
     },
     {
-        title: "Vacation camps ",
-        description: "Adventure with relaxation of minds and uniting the society.",
-        image: "/fun.jpg",
-      },
-  ]
+      title: "Vacation camps ",
+      description: "Adventure with relaxation of minds and uniting the society.",
+      image: "/fun.jpg",
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -204,10 +204,10 @@ export default function Programs() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">"You Will Never Walk Alone"</p>
+            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }

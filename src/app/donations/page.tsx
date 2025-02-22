@@ -4,22 +4,20 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CreditCard, DollarSign, Gift } from 'lucide-react';
-import Header from '../Navbar';
-import Footer from '../Footer';
 
 export default function Donations() {
   const [donationType, setDonationType] = useState('one-time');
   const [amount, setAmount] = useState('');
 
-const handleDonationTypeChange = (type: string) => {
+  const handleDonationTypeChange = (type: string) => {
     setDonationType(type);
   };
 
-const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value);
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle donation submission logic here
     console.log('Donation submitted:', { type: donationType, amount });
@@ -239,7 +237,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">"You Will Never Walk Alone"</p>
+            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
       </footer>
