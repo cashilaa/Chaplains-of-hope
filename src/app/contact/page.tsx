@@ -10,11 +10,11 @@ export default function Contact() {
     message: '',
   });
 
-const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log('Form submitted:', formData);
@@ -35,8 +35,8 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         <section className="relative h-[50vh] bg-cover bg-center flex items-center justify-center" style={{backgroundImage: "url('/contact-hero.jpg')"}}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-<h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Let's Connect</h1>
-<p className="text-xl md:text-2xl animate-fade-in animation-delay-300">We're here to answer your questions and hear your thoughts</p>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Let&apos;s Connect</h1>
+            <p className="text-xl md:text-2xl animate-fade-in animation-delay-300">We&apos;re here to answer your questions and hear your thoughts</p>
           </div>
         </section>
 
@@ -128,7 +128,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
-allowFullScreen
+                      allowFullScreen
                       loading="lazy"
                     ></iframe>
                   </div>
@@ -145,7 +145,7 @@ allowFullScreen
                     </a>
                     <a href="#" className="text-green-600 hover:text-green-700">
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348" />
                       </svg>
                     </a>
                     <a href="#" className="text-green-600 hover:text-green-700">
