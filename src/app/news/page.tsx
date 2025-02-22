@@ -61,7 +61,7 @@ export default function News() {
     },
   ]
 
-  const handleSearchChange = (e) => {
+const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
   }
 
@@ -185,4 +185,3 @@ export default function News() {
     </div>
   )
 }
-
