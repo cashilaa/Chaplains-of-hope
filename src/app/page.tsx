@@ -75,7 +75,7 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">"Inspiring Hope, Changing Lives"</h2>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">&quot;Inspiring Hope, Changing Lives&quot;</h2>
             <p className="text-xl md:text-2xl mb-8 animate-fade-in animation-delay-300">
               Join us in making a difference in our community
             </p>
@@ -95,7 +95,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 "Reintegration & Mentorship",
-                "Children's Rights Advocacy",
+                "Children&apos;s Rights Advocacy",
                 "Community Paralegal Services",
                 "Disaster Management & Social Justice",
               ].map((area, index) => (
@@ -281,7 +281,7 @@ export default function Home() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2023 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">"You Will Never Walk Alone"</p>
+            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
           </div>
         </div>
       </footer>
