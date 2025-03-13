@@ -43,7 +43,7 @@ export default function Home() {
       <header className="bg-white shadow-md py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={120} height={120} className="mr-2 transform scale-150" />
+            <Image src="/logo.png" alt="Logo" width={150} height={150} className="mr-2 transform scale-150" />
           </div>
           <nav className="hidden md:flex space-x-4">
             <Link href="/about" className="hover:text-red-500 transition-colors">
@@ -229,7 +229,7 @@ export default function Home() {
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
               <p>00100 Muslim, Kawangware, Nairobi</p>
               <p>Phone: (+245) 728620614/ 100546840</p>
-              <p>Email: chaplinofhopecbo@gmail.com</p>
+              <p>Email: chaplinsofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -269,11 +269,11 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="https://www.facebook.com/muthioram.kuria/" className="hover:text-gray-300">
+                <a href="https://www.facebook.com/wehavewalkedwithyou" className="hover:text-gray-300">
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
-                  <Image src="/twitter.svg" alt="Twitter" width={24} height={24} />
+                  <Image src="/youtube.svg" alt="YouTube" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
                   <Image src="/instagram.svg" alt="Instagram" width={24} height={24} />
@@ -283,7 +283,7 @@ export default function Home() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
+            <p className="mt-2 text-lg font-semibold">&quot;We Have Walked With You&quot;</p>
           </div>
         </div>
       </footer>

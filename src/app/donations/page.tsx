@@ -32,7 +32,7 @@ export default function Donations() {
       <header className="bg-white shadow-md py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={120} height={120} className="mr-2 transform scale-150" />
+            <Image src="/logo.png" alt="Logo" width={150} height={150} className="mr-2 transform scale-150" />
           </div>
           <nav className="hidden md:flex space-x-4">
             <Link href="/about" className="hover:text-red-500 transition-colors">
@@ -102,55 +102,88 @@ export default function Donations() {
         <section className="py-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 text-green-700">Make Your Donation</h2>
-            <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold mb-4">Choose Donation Type</h3>
-                <div className="flex space-x-4">
-                  <button
-                    type="button"
-                    className={`flex-1 py-2 px-4 rounded-full ${donationType === 'one-time' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                    onClick={() => handleDonationTypeChange('one-time')}
-                  >
-                    One-time
-                  </button>
-                  <button
-                    type="button"
-                    className={`flex-1 py-2 px-4 rounded-full ${donationType === 'monthly' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                    onClick={() => handleDonationTypeChange('monthly')}
-                  >
-                    Monthly
-                  </button>
-                </div>
-              </div>
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold mb-4">Select Amount</h3>
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  {['10', '25', '50', '100', '250', '500'].map((value) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-4">Choose Donation Type</h3>
+                  <div className="flex space-x-4">
                     <button
-                      key={value}
                       type="button"
-                      className={`py-2 px-4 rounded-full ${amount === value ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                      onClick={() => setAmount(value)}
+                      className={`flex-1 py-2 px-4 rounded-full ${donationType === 'one-time' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      onClick={() => handleDonationTypeChange('one-time')}
                     >
-                      ${value}
+                      One-time
                     </button>
-                  ))}
+                    <button
+                      type="button"
+                      className={`flex-1 py-2 px-4 rounded-full ${donationType === 'monthly' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      onClick={() => handleDonationTypeChange('monthly')}
+                    >
+                      Monthly
+                    </button>
+                  </div>
                 </div>
-                <input
-                  type="number"
-                  placeholder="Other amount"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-                />
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-4">Select Amount</h3>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    {['10', '25', '50', '100', '250', '500'].map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        className={`py-2 px-4 rounded-full ${amount === value ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        onClick={() => setAmount(value)}
+                      >
+                        ${value}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Other amount"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-green-600 text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+                >
+                  Donate Now
+                </button>
+              </form>
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold mb-4">Donate in Kenyan Shillings</h3>
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-4">Select Amount</h3>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    {['1000', '2500', '5000', '10000', '25000', '50000'].map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        className={`py-2 px-4 rounded-full ${amount === value ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        onClick={() => setAmount(value)}
+                      >
+                        KES {value}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Other amount"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-green-600 text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+                >
+                  Donate Now
+                </button>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
-              >
-                Donate Now
-              </button>
-            </form>
+            </div>
           </div>
         </section>
 
@@ -183,7 +216,7 @@ export default function Donations() {
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
               <p>00100 Muslim, Kawangware, Nairobi</p>
               <p>Phone: (+245) 728620614/ 100546840</p>
-              <p>Email: chaplinofhopecbo@gmail.com</p>
+              <p>Email: chaplinsofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -227,7 +260,7 @@ export default function Donations() {
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
-                  <Image src="/twitter.svg" alt="Twitter" width={24} height={24} />
+                  <Image src="/youtube.svg" alt="YouTube" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
                   <Image src="/instagram.svg" alt="Instagram" width={24} height={24} />
@@ -237,7 +270,7 @@ export default function Donations() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
+            <p className="mt-2 text-lg font-semibold">&quot;We Have Walked With You&quot;</p>
           </div>
         </div>
       </footer>

@@ -11,7 +11,7 @@ export default function Membership() {
   const plans = [
     {
       name: 'Standard Membership',
-      price: '$50/year',
+      price: 'Ksh1000/year',
       features: [
         'Access to exclusive events',
         'Quarterly newsletter',
@@ -20,7 +20,7 @@ export default function Membership() {
     },
     {
       name: 'Lifetime Membership',
-      price: '$500',
+      price: 'Ksh5000/year',
       features: [
         'All Standard Membership benefits',
         'Lifetime access to all programs',
@@ -29,7 +29,7 @@ export default function Membership() {
     },
     {
       name: 'Sponsorship Membership',
-      price: '$1000/year',
+      price: 'Ksh10000/year',
       features: [
         'All Lifetime Membership benefits',
         'Sponsor a program of your choice',
@@ -51,7 +51,7 @@ export default function Membership() {
       <header className="bg-white shadow-md py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={120} height={120} className="mr-2 transform scale-150" />
+            <Image src="/logo.png" alt="Logo" width={150} height={150} className="mr-2 transform scale-150" />
           </div>
           <nav className="hidden md:flex space-x-4">
             <Link href="/about" className="hover:text-red-500 transition-colors">
@@ -183,7 +183,7 @@ export default function Membership() {
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
               <p>00100 Muslim, Kawangware, Nairobi</p>
               <p>Phone: (+245) 728620614/ 100546840</p>
-              <p>Email: chaplinofhopecbo@gmail.com</p>
+              <p>Email: chaplinsofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -227,7 +227,7 @@ export default function Membership() {
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
-                  <Image src="/twitter.svg" alt="Twitter" width={24} height={24} />
+                  <Image src="/youtube.svg" alt="YouTube" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
                   <Image src="/instagram.svg" alt="Instagram" width={24} height={24} />
@@ -237,7 +237,7 @@ export default function Membership() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
+            <p className="mt-2 text-lg font-semibold">&quot;We Have Walked With You&quot;</p>
           </div>
         </div>
       </footer>

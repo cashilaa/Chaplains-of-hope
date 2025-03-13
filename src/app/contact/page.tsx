@@ -129,21 +129,21 @@ export default function Contact() {
                     <MapPin className="w-6 h-6 text-green-600 mr-4 mt-1" />
                     <div>
                       <h3 className="font-semibold text-lg">Our Office</h3>
-                      <p className="text-gray-600">123 Hope Street, Nairobi, Kenya</p>
+                      <p className="text-gray-600">00100 Dagorreti North, Kabiro Ward, Kawangware Location, Muslim Sub-location along Muthiora road NEXT TO Muslim Chief's Office</p>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <Phone className="w-6 h-6 text-green-600 mr-4 mt-1" />
                     <div>
                       <h3 className="font-semibold text-lg">Phone</h3>
-                      <p className="text-gray-600">+254 123 456 789</p>
+                      <p className="text-gray-600">(+245) 728620614/ 100546840</p>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <Mail className="w-6 h-6 text-green-600 mr-4 mt-1" />
                     <div>
                       <h3 className="font-semibold text-lg">Email</h3>
-                      <p className="text-gray-600">info@chaplainsofhope.org</p>
+                      <p className="text-gray-600">chaplinofhopecbo@gmail.com</p>
                     </div>
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                   <h3 className="font-semibold text-lg mb-4">Find Us on the Map</h3>
                   <div className="aspect-w-16 aspect-h-9">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.819917806043!2d36.81779151475422!3d-1.2833299990629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d22f28f0c7%3A0x2b8e3858d4afa9b7!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2sus!4v1625764215076!5m2!1sen!2sus"
+                      src="https://www.google.com/maps/place/Chaplin's+Of+Hope+CBO/@-1.2797465,36.744058,19z/data=!3m1!4b1!4m6!3m5!1s0x182f1a2a4ac3f707:0x54a478a18ddd45a9!8m2!3d-1.2797478!4d36.7447017!16s%2Fg%2F119w9g0g_?hl=en&entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
@@ -197,7 +197,7 @@ export default function Contact() {
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
               <p>00100 Muslim, Kawangware, Nairobi</p>
               <p>Phone: (+245) 728620614/ 100546840</p>
-              <p>Email: chaplinofhopecbo@gmail.com</p>
+              <p>Email: chaplinsofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -237,11 +237,11 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="https://www.facebook.com/muthioram.kuria/" className="hover:text-gray-300">
+                <a href="https://www.facebook.com/wehavewalkedwithyou/" className="hover:text-gray-300">
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
-                  <Image src="/twitter.svg" alt="Twitter" width={24} height={24} />
+                  <Image src="/youtube.svg" alt="YouTube" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
                   <Image src="/instagram.svg" alt="Instagram" width={24} height={24} />
@@ -251,7 +251,7 @@ export default function Contact() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
+            <p className="mt-2 text-lg font-semibold">&quot;We Have Walked With You&quot;</p>
           </div>
         </div>
       </footer>

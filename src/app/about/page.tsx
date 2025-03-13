@@ -9,7 +9,7 @@ export default function About() {
   const [currentTeamMember, setCurrentTeamMember] = useState(0);
 
   const teamMembers = [
-    { name: "John Doe", role: "Executive Director", bio: "John has over 20 years of experience in community service...", image: "/team1.jpg" },
+    { name: "Stephen muthiora kuria", role: "Convinor chaplins of Hope Social Justice Center -Dagoretti", bio: "John has over 20 years of experience in community service...", image: "/muthiora.jpg" },
     { name: "Jane Smith", role: "Program Manager", bio: "Jane oversees all our programs and ensures their success...", image: "/team2.jpg" },
     { name: "Michael Brown", role: "Community Outreach", bio: "Michael works closely with the community to provide support...", image: "/team3.jpg" },
   ];
@@ -31,7 +31,7 @@ export default function About() {
       <header className="bg-white shadow-md py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={120} height={120} className="mr-2 transform scale-150" />
+            <Image src="/logo.png" alt="Logo" width={150} height={150} className="mr-2 transform scale-150" />
           </div>
           <nav className="hidden md:flex space-x-4">
             <Link href="/about" className="hover:text-red-500 transition-colors">
@@ -62,7 +62,7 @@ export default function About() {
         <section className="relative h-[50vh] bg-cover bg-center flex items-center justify-center" style={{backgroundImage: "url('/about-hero.jpg')"}}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">&quot;Inspiring Hope, Changing Lives&quot;</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">&quot;We Have Walked With You&quot;</h1>
           </div>
         </section>
 
@@ -164,9 +164,9 @@ export default function About() {
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-200"></div>
               <div className="space-y-12">
                 {[
-                  { year: 2000, title: "Founded", description: "Chaplains of Hope was established to provide support to those in need." },
-                  { year: 2010, title: "Expanded Services", description: "We expanded our services to include community paralegal support." },
-                  { year: 2020, title: "Awarded for Excellence", description: "We received recognition for our outstanding community service." },
+                  { year: 2023, title: "Registered", description: "16 October, Registered as a community Based Organization" },
+                  { year: 2023, title: "Founded", description: "Programs done are Reintegration services and Boychild Advocacy" },
+                  { year: 2024, title: "Expanded Services", description: "We expanded our services to iclude Contact Tracing of Lost children and Opened a social Justice Center." },
                 ].map((event, index) => (
                   <div key={index} className={`relative ${index % 2 === 0 ? 'left-timeline' : 'right-timeline'}`}>
                     <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-green-500 rounded-full"></div>
@@ -189,7 +189,7 @@ export default function About() {
               <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
               <p>00100 Muslim, Kawangware, Nairobi</p>
               <p>Phone: (+245) 728620614/ 100546840</p>
-              <p>Email: chaplinofhopecbo@gmail.com</p>
+              <p>Email: chaplinsofhopecbo@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
@@ -233,7 +233,7 @@ export default function About() {
                   <Image src="/facebook.svg" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
-                  <Image src="/twitter.svg" alt="Twitter" width={24} height={24} />
+                  <Image src="/youtube.svg" alt="YouTube" width={24} height={24} />
                 </a>
                 <a href="#" className="hover:text-gray-300">
                   <Image src="/instagram.svg" alt="Instagram" width={24} height={24} />
@@ -243,7 +243,7 @@ export default function About() {
           </div>
           <div className="mt-8 text-center">
             <p>&copy; 2025 Chaplains of Hope. All rights reserved.</p>
-            <p className="mt-2 text-lg font-semibold">&quot;You Will Never Walk Alone&quot;</p>
+            <p className="mt-2 text-lg font-semibold">&quot;We Have Walked With You&quot;</p>
           </div>
         </div>
       </footer>
