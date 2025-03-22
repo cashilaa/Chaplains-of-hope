@@ -129,7 +129,7 @@ export default function Contact() {
                     <MapPin className="w-6 h-6 text-green-600 mr-4 mt-1" />
                     <div>
                       <h3 className="font-semibold text-lg">Our Office</h3>
-                      <p className="text-gray-600">00100 Dagorreti North, Kabiro Ward, Kawangware Location, Muslim Sub-location along Muthiora road NEXT TO Muslim Chief's Office</p>
+<p className="text-gray-600">00100 Dagorreti North, Kabiro Ward, Kawangware Location, Muslim Sub-location along Muthiora road NEXT TO Muslim Chief&apos;s Office</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -143,7 +143,7 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-green-600 mr-4 mt-1" />
                     <div>
                       <h3 className="font-semibold text-lg">Email</h3>
-                      <p className="text-gray-600">chaplinofhopecbo@gmail.com</p>
+<p className="text-gray-600">chaplinofhope&apos;cbo@gmail.com</p>
                     </div>
                   </div>
                 </div>
