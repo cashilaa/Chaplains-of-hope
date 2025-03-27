@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { AnimatedSection } from "@/components/ui/animated-section"
-import { X } from "lucide-react"
+import { X, Trash2, AlertCircle } from "lucide-react"
 
 interface ImageItem {
   id: number
@@ -18,6 +18,9 @@ export default function ProgramGallery() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState("")
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState("")
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   const pathname = usePathname()
   // Extract the program ID from the URL path (last segment)
@@ -72,7 +75,35 @@ export default function ProgramGallery() {
 
   const closeLightbox = () => {
     setSelectedImage(null)
+    setShowDeleteConfirm(false)
     document.body.style.overflow = "auto"
+  }
+
+  const deleteImage = async (filename: string) => {
+    try {
+      setIsDeleting(true)
+      setDeleteError("")
+
+      const response = await fetch(`/api/delete-image?filename=${encodeURIComponent(filename)}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        const text = await response.text()
+        console.error("Server response:", text)
+        throw new Error(`HTTP error ${response.status}`)
+      }
+
+      // Close lightbox and refresh gallery
+      closeLightbox()
+      fetchImages()
+    } catch (error) {
+      console.error("Error deleting image:", error)
+      setDeleteError(error instanceof Error ? error.message : "Failed to delete image. Please try again.")
+    } finally {
+      setIsDeleting(false)
+      setShowDeleteConfirm(false)
+    }
   }
 
   if (isLoading) {
@@ -129,7 +160,7 @@ export default function ProgramGallery() {
                 <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
                 <img
                   src={`/uploads/${image.filename}`}
-                  alt={image.description || "Uploaded image"}
+                  alt={image.description || "Gallery image"}
                   className="absolute inset-0 w-full h-full object-cover z-10 group-hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
@@ -166,7 +197,7 @@ export default function ProgramGallery() {
               <div className="relative h-[60vh] bg-gray-100">
                 <img
                   src={`/uploads/${selectedImage.filename}`}
-                  alt={selectedImage.description || "Uploaded image"}
+                  alt={selectedImage.description || "Gallery image"}
                   className="w-full h-full object-contain"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
@@ -174,12 +205,25 @@ export default function ProgramGallery() {
                   }}
                 />
               </div>
-              <button
-                className="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors"
-                onClick={closeLightbox}
-              >
-                <X size={20} />
-              </button>
+              <div className="absolute top-4 right-4 flex space-x-2">
+                <button
+                  className="bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setShowDeleteConfirm(true)
+                  }}
+                  title="Delete image"
+                >
+                  <Trash2 size={20} />
+                </button>
+                <button
+                  className="bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors"
+                  onClick={closeLightbox}
+                  title="Close"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
             <div className="p-6">
               {selectedImage.description ? (
@@ -197,6 +241,50 @@ export default function ProgramGallery() {
               </p>
             </div>
           </div>
+
+          {/* Delete confirmation dialog */}
+          {showDeleteConfirm && (
+            <div
+              className="fixed inset-0 bg-black/50 z-60 flex items-center justify-center p-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">
+                <div className="flex items-center text-red-500 mb-4">
+                  <AlertCircle className="mr-2" />
+                  <h3 className="text-lg font-semibold">Delete Image</h3>
+                </div>
+                <p className="text-gray-700 mb-6">
+                  Are you sure you want to delete this image? This action cannot be undone.
+                </p>
+
+                {deleteError && <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">{deleteError}</div>}
+
+                <div className="flex justify-end space-x-3">
+                  <button
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
+                    onClick={() => setShowDeleteConfirm(false)}
+                    disabled={isDeleting}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors flex items-center"
+                    onClick={() => deleteImage(selectedImage.filename)}
+                    disabled={isDeleting}
+                  >
+                    {isDeleting ? (
+                      <>
+                        <div className="animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                        Deleting...
+                      </>
+                    ) : (
+                      <>Delete</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

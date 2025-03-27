@@ -52,7 +52,31 @@ export default async function handler(req, res) {
       const programId = fields.programId || "unknown"
       const description = fields.description || ""
 
-      // In a real app, you would save this information to a database
+      // Save metadata
+      const metadataPath = path.join(uploadsDir, "metadata.json")
+      let metadata = {}
+
+      // Load existing metadata if it exists
+      if (fs.existsSync(metadataPath)) {
+        try {
+          const metadataContent = fs.readFileSync(metadataPath, "utf8")
+          metadata = JSON.parse(metadataContent)
+        } catch (err) {
+          console.error("Error reading metadata:", err)
+          // Continue with empty metadata if file is corrupted
+        }
+      }
+
+      // Add new file metadata
+      metadata[newFilename] = {
+        programId,
+        description,
+        uploadDate: new Date().toISOString(),
+      }
+
+      // Save updated metadata
+      fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
+
       console.log("File uploaded:", {
         filename: newFilename,
         programId,

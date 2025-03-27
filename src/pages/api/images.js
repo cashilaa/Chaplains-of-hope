@@ -25,6 +25,21 @@ export default function handler(req, res) {
       return res.status(200).json({ images: [] })
     }
 
+    // Path to metadata file
+    const metadataPath = path.join(process.cwd(), "public/uploads/metadata.json")
+
+    // Load metadata if exists
+    let metadata = {}
+    if (fs.existsSync(metadataPath)) {
+      try {
+        const metadataContent = fs.readFileSync(metadataPath, "utf8")
+        metadata = JSON.parse(metadataContent)
+      } catch (err) {
+        console.error("Error reading metadata:", err)
+        // Continue with empty metadata if file is corrupted
+      }
+    }
+
     // Read files from the uploads directory
     const files = fs.readdirSync(uploadsDir)
     console.log("Files in uploads directory:", files)
@@ -33,17 +48,19 @@ export default function handler(req, res) {
     const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
     const imageFiles = files.filter((file) => {
       const ext = path.extname(file).toLowerCase()
-      return imageExtensions.includes(ext)
+      return imageExtensions.includes(ext) && file !== "metadata.json"
     })
 
     // Create image objects
     const images = imageFiles.map((filename, index) => {
       const stats = fs.statSync(path.join(uploadsDir, filename))
+      const fileMetadata = metadata[filename] || {}
+
       return {
         id: index + 1,
         filename,
-        description: `Uploaded image ${index + 1}`,
-        programId,
+        description: fileMetadata.description || `Image ${index + 1}`,
+        programId: fileMetadata.programId || programId,
         uploadDate: stats.mtime.toISOString(),
       }
     })
