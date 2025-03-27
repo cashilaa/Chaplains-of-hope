@@ -57,21 +57,21 @@ export default function EnvironmentalAdvocacyAndConservation() {
       description:
         "Our annual tree planting initiative aims to restore degraded landscapes and increase forest cover in urban and rural areas.",
       impact: "10,000+ trees planted across 5 counties",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/tree.jpeg?height=300&width=400",
     },
     {
       title: "Clean Water Project",
       description:
         "Working to protect water sources, reduce pollution, and ensure communities have access to clean, safe water.",
       impact: "15 water sources protected, benefiting 5,000+ people",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/water.jpeg?height=300&width=400",
     },
     {
       title: "Waste Management Program",
       description:
         "Implementing community-based waste collection, segregation, and recycling systems to reduce environmental pollution.",
       impact: "50% reduction in improper waste disposal in target communities",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/download.jpeg?height=300&width=400",
     },
   ]
 

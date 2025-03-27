@@ -1,7 +1,6 @@
 "use client"
 
 import Head from "next/head"
-import Image from "next/image"
 import { Phone, CreditCard, DollarSign, Gift } from "lucide-react"
 
 import { Navbar } from "../../components/ui/navbar"
@@ -111,11 +110,10 @@ export default function Donations() {
                   <div className="flex flex-col md:flex-row gap-8 items-center">
                     <div className="md:w-1/2">
                       <div className="relative w-full h-64 md:h-80">
-                        <Image
+                        <img
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-la8NNL8L01B9bKhcwTrkr2o79PPHav.png"
                           alt="Lipa Na M-Pesa Paybill details"
-                          fill
-                          className="object-contain rounded-lg"
+                          className="object-contain rounded-lg w-full h-full"
                         />
                       </div>
                     </div>
