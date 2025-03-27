@@ -20,6 +20,7 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -35,13 +36,31 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
 
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Form submitted:", formData)
+    try {
+      // Send email using EmailJS or a similar service
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          to: "chaplinsofhopecbo@gmail.com", // The email from the contact page
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to send message")
+      }
+
+      // Clear form and show success message
       setFormData({ name: "", email: "", message: "" })
       setIsSubmitting(false)
       setFormSubmitted(true)
@@ -50,7 +69,11 @@ export default function Contact() {
       setTimeout(() => {
         setFormSubmitted(false)
       }, 5000)
-    }, 1500)
+    } catch (error) {
+      console.error("Error sending email:", error)
+      setIsSubmitting(false)
+      setSubmitError("Failed to send your message. Please try again later.")
+    }
   }
 
   const footerLinks = navItems.map((item) => ({ label: item.label, href: item.href }))
@@ -152,6 +175,11 @@ export default function Contact() {
                       ></span>
                       <span className="relative">{isSubmitting ? "Sending..." : "Send Message"}</span>
                     </button>
+                    {submitError && (
+                      <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200">
+                        {submitError}
+                      </div>
+                    )}
                   </form>
                 )}
               </AnimatedSection>
@@ -203,12 +231,13 @@ export default function Contact() {
                   <h3 className="font-semibold text-lg mb-4">Find Us on the Map</h3>
                   <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 aspect-w-16 aspect-h-9">
                     <iframe
-                      src="https://www.google.com/maps/place/Chaplin's+Of+Hope+CBO/@-1.2797465,36.744058,19z/data=!3m1!4b1!4m6!3m5!1s0x182f1a2a4ac3f707:0x54a478a18ddd45a9!8m2!3d-1.2797478!4d36.7447017!16s%2Fg%2F119w9g0g_?hl=en&entry=ttu&g_ep=EgoyMDI1MDMwNC.wIKXMDSoASAFQAw%3D%3D"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997.5989908780438!2d36.744058!3d-1.2797465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a2a4ac3f707%3A0x54a478a18ddd45a9!2sChaplin&#39;s%20Of%20Hope%20CBO!5e0!3m2!1sen!2sus!4v1711566789012!5m2!1sen!2sus"
                       width="100%"
-                      height="100%"
+                      height="300"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                   </div>
                 </div>
@@ -227,7 +256,7 @@ export default function Contact() {
         links={footerLinks}
         socialLinks={{
           facebook: "https://www.facebook.com/wehavewalkedwithyou/",
-          youtube: "#",
+          youtube: "https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK",
           instagram: "#",
         }}
         tagline="We Have Walked With You"

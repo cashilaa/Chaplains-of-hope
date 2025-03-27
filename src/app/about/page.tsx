@@ -81,7 +81,7 @@ export default function About() {
                 <div className="relative">
                   <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-lg -z-10"></div>
                   <Image
-                    src="/who-we-are.jpg"
+                    src="/membership-overview.jpg"
                     alt="Who We Are"
                     width={500}
                     height={300}

@@ -1,10 +1,8 @@
 "use client"
 
-import type React from "react"
-
 import Head from "next/head"
-import { useState } from "react"
-import { CreditCard, DollarSign, Gift } from "lucide-react"
+import Image from "next/image"
+import { Phone, CreditCard, DollarSign, Gift } from "lucide-react"
 
 import { Navbar } from "../../components/ui/navbar"
 import { Footer } from "../../components/ui/footer"
@@ -13,9 +11,6 @@ import { AnimatedSection } from "../../components/ui/animated-section"
 import { CardHover } from "../../components/ui/card-hover"
 
 export default function Donations() {
-  const [donationType, setDonationType] = useState("one-time")
-  const [amount, setAmount] = useState("")
-
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },
@@ -25,20 +20,6 @@ export default function Donations() {
     { label: "News", href: "/news" },
     { label: "Contact Us", href: "/contact" },
   ]
-
-  const handleDonationTypeChange = (type: string) => {
-    setDonationType(type)
-  }
-
-  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(e.target.value)
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // Handle donation submission logic here
-    console.log("Donation submitted:", { type: donationType, amount })
-  }
 
   const footerLinks = navItems.map((item) => ({ label: item.label, href: item.href }))
 
@@ -111,7 +92,7 @@ export default function Donations() {
           </div>
         </section>
 
-        {/* Donation Form Section */}
+        {/* M-Pesa Donation Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <AnimatedSection className="text-center mb-12">
@@ -119,128 +100,61 @@ export default function Donations() {
                 Make Your Donation
                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary"></span>
               </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Support our mission by donating through M-Pesa, Airtel Money, or your bank
+              </p>
             </AnimatedSection>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="max-w-3xl mx-auto">
               <AnimatedSection delay={0.1}>
-                <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md">
-                  <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 text-primary">Choose Donation Type</h3>
-                    <div className="flex space-x-4">
-                      <button
-                        type="button"
-                        className={`flex-1 py-3 px-4 rounded-full transition-all ${
-                          donationType === "one-time"
-                            ? "bg-primary text-white shadow-md"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                        }`}
-                        onClick={() => handleDonationTypeChange("one-time")}
-                      >
-                        One-time
-                      </button>
-                      <button
-                        type="button"
-                        className={`flex-1 py-3 px-4 rounded-full transition-all ${
-                          donationType === "monthly"
-                            ? "bg-primary text-white shadow-md"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                        }`}
-                        onClick={() => handleDonationTypeChange("monthly")}
-                      >
-                        Monthly
-                      </button>
+                <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                  <div className="flex flex-col md:flex-row gap-8 items-center">
+                    <div className="md:w-1/2">
+                      <div className="relative w-full h-64 md:h-80">
+                        <Image
+                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-la8NNL8L01B9bKhcwTrkr2o79PPHav.png"
+                          alt="Lipa Na M-Pesa Paybill details"
+                          fill
+                          className="object-contain rounded-lg"
+                        />
+                      </div>
                     </div>
-                  </div>
+                    <div className="md:w-1/2">
+                      <h3 className="text-2xl font-bold text-primary mb-6">Donation Details</h3>
 
-                  <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 text-primary">Select Amount</h3>
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                      {["10", "25", "50", "100", "250", "500"].map((value) => (
-                        <button
-                          key={value}
-                          type="button"
-                          className={`py-3 px-4 rounded-full transition-all ${
-                            amount === value
-                              ? "bg-primary text-white shadow-md"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                          }`}
-                          onClick={() => setAmount(value)}
-                        >
-                          ${value}
-                        </button>
-                      ))}
+                      <div className="space-y-6">
+                        <div>
+                          <h4 className="text-lg font-semibold mb-2 flex items-center">
+                            <Phone className="w-5 h-5 mr-2 text-green-600" />
+                            M-Pesa / Airtel Money
+                          </h4>
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <p className="font-medium">
+                              Paybill Number: <span className="text-green-700">400200</span>
+                            </p>
+                            <p className="font-medium">
+                              Account Number: <span className="text-green-700">4038</span>
+                            </p>
+                            <p className="font-medium">
+                              Business Name: <span className="text-green-700">CHAPLINS OF HOPE</span>
+                            </p>
+                          </div>
+                          <div className="mt-4 text-sm text-gray-600">
+                            <p className="mb-2">
+                              <strong>How to donate:</strong>
+                            </p>
+                            <ol className="list-decimal pl-5 space-y-1">
+                              <li>Go to M-Pesa or Airtel Money on your phone</li>
+                              <li>Select "Pay Bill" option</li>
+                              <li>Enter Business Number: 400200</li>
+                              <li>Enter Account Number: 4038</li>
+                              <li>Enter Amount</li>
+                              <li>Enter your PIN and confirm</li>
+                            </ol>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
-                    <div className="relative">
-                      <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                      <input
-                        type="number"
-                        placeholder="Other amount"
-                        value={amount}
-                        onChange={handleAmountChange}
-                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring focus:ring-primary/20 focus:outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-primary text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-primary/90 transition-colors relative overflow-hidden group"
-                  >
-                    <span className="absolute inset-0 w-0 bg-white/20 transition-all duration-300 group-hover:w-full"></span>
-                    <span className="relative">Donate Now</span>
-                  </button>
-                </form>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.3} direction="left">
-                <div className="bg-white p-8 rounded-xl shadow-md">
-                  <h3 className="text-xl font-semibold mb-6 text-primary">Donate in Kenyan Shillings</h3>
-
-                  <div className="mb-8">
-                    <h4 className="text-lg font-medium mb-4 text-gray-700">Select Amount</h4>
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                      {["1000", "2500", "5000", "10000", "25000", "50000"].map((value) => (
-                        <button
-                          key={value}
-                          type="button"
-                          className={`py-3 px-4 rounded-full transition-all ${
-                            amount === value
-                              ? "bg-primary text-white shadow-md"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                          }`}
-                          onClick={() => setAmount(value)}
-                        >
-                          KES {value}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="relative">
-                      <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">KES</span>
-                      <input
-                        type="number"
-                        placeholder="Other amount"
-                        value={amount}
-                        onChange={handleAmountChange}
-                        className="w-full pl-16 pr-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring focus:ring-primary/20 focus:outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-primary text-white py-3 px-6 rounded-full text-lg font-semibold hover:bg-primary/90 transition-colors relative overflow-hidden group"
-                  >
-                    <span className="absolute inset-0 w-0 bg-white/20 transition-all duration-300 group-hover:w-full"></span>
-                    <span className="relative">Donate Now</span>
-                  </button>
-
-                  <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <h4 className="font-medium text-gray-700 mb-2">Other Ways to Donate</h4>
-                    <p className="text-gray-600 text-sm">
-                      You can also donate via M-Pesa or bank transfer. Contact us for more details.
-                    </p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -296,7 +210,7 @@ export default function Donations() {
         links={footerLinks}
         socialLinks={{
           facebook: "https://www.facebook.com/muthioram.kuria/",
-          youtube: "#",
+          youtube: "https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK",
           instagram: "#",
         }}
         tagline="We Have Walked With You"

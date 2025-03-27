@@ -74,7 +74,7 @@ export function Footer({ contactInfo, links, socialLinks, tagline }: FooterProps
               )}
               {socialLinks.youtube && (
                 <a
-                  href={socialLinks.youtube}
+                  href="https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK"
                   className="bg-white/10 hover:bg-green-600 p-3 rounded-full transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -93,18 +93,17 @@ export function Footer({ contactInfo, links, socialLinks, tagline }: FooterProps
                 </a>
               )}
             </div>
-            <div className="bg-white/5 p-4 rounded-lg">
-              <p className="text-sm">Subscribe to our newsletter</p>
-              <div className="mt-2 flex">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-grow px-3 py-2 bg-white/10 rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-500"
-                />
-                <button className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-r-md transition-colors">
-                  Subscribe
-                </button>
-              </div>
+            <div className="mt-4">
+              <p className="text-sm mb-2">Visit our YouTube channel:</p>
+              <a
+                href="https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK"
+                className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Youtube className="w-5 h-5 mr-2" />
+                Chaplins of Hope
+              </a>
             </div>
           </div>
         </AnimatedSection>
