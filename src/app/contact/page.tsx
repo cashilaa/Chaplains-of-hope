@@ -255,7 +255,7 @@ export default function Contact() {
         }}
         links={footerLinks}
         socialLinks={{
-          facebook: "https://www.facebook.com/wehavewalkedwithyou/",
+          facebook: "https://www.facebook.com/wehavewalkedwithyou",
           youtube: "https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK",
           instagram: "#",
         }}

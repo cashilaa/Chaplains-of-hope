@@ -169,8 +169,10 @@ export default function About() {
                         <h3 className="text-xl font-semibold mb-2 text-primary">{value}</h3>
                       </div>
                       <p className="text-gray-600">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
+                      These values form the foundation of a strong and ethical community. 
+                      Compassion fosters kindness, while integrity builds trust through honesty. 
+                      Respect ensures inclusivity, and empowerment gives individuals the confidence to grow. 
+                      Collaboration strengthens teamwork, and innovation drives continuous progress. Together, they create a culture of positivity, excellence, and shared success.
                       </p>
                     </CardHover>
                   </AnimatedSection>
@@ -318,7 +320,7 @@ export default function About() {
         }}
         links={footerLinks}
         socialLinks={{
-          facebook: "https://www.facebook.com/muthioram.kuria/",
+          facebook: "https://www.facebook.com/wehavewalkedwithyou",
           youtube: "#",
           instagram: "#",
         }}

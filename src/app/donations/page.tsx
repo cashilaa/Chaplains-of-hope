@@ -207,7 +207,7 @@ export default function Donations() {
         }}
         links={footerLinks}
         socialLinks={{
-          facebook: "https://www.facebook.com/muthioram.kuria/",
+          facebook: "https://www.facebook.com/wehavewalkedwithyou",
           youtube: "https://youtube.com/@chaplinsofhopecbo?si=WvL-0o65HPa08eOK",
           instagram: "#",
         }}

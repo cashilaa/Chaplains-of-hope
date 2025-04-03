@@ -256,7 +256,7 @@ export default function News() {
         }}
         links={footerLinks}
         socialLinks={{
-          facebook: "https://www.facebook.com/muthioram.kuria/",
+          facebook: "https://www.facebook.com/wehavewalkedwithyou",
           youtube: "#",
           instagram: "#",
         }}

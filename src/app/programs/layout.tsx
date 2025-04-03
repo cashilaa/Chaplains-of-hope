@@ -144,7 +144,7 @@ export default function ProgramsLayout({
               <h3 className="text-xl font-semibold mb-6 border-b border-green-500 pb-2 inline-block">Follow Us</h3>
               <div className="flex space-x-4 mb-6">
                 <a
-                  href="https://www.facebook.com/muthioram.kuria/"
+                  href="https://www.facebook.com/wehavewalkedwithyou"
                   className="bg-white/10 hover:bg-green-600 p-3 rounded-full transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
