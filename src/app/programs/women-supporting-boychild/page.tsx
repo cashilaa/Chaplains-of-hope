@@ -117,7 +117,7 @@ export default function WomenSupportingBoychild() {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-green-100 rounded-lg -z-10"></div>
                 <Image
-                  src="/placeholder.svg?height=500&width=700"
+                  src="/collabo-support.jpg?height=500&width=700"
                   alt="Women Supporting the Boychild"
                   width={700}
                   height={500}
