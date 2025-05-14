@@ -60,15 +60,18 @@ export default function handler(req, res) {
         id: index + 1,
         filename,
         description: fileMetadata.description || `Image ${index + 1}`,
-        programId: fileMetadata.programId || programId,
+        programId: fileMetadata.programId || "unknown",
         uploadDate: stats.mtime.toISOString(),
       }
     })
 
-    // Sort by upload date (newest first)
-    images.sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime())
+    // Filter images by program ID
+    const filteredImages = images.filter(image => image.programId === programId)
 
-    return res.status(200).json({ images })
+    // Sort by upload date (newest first)
+    filteredImages.sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime())
+
+    return res.status(200).json({ images: filteredImages })
   } catch (error) {
     console.error("Error fetching images:", error)
     return res.status(500).json({ error: "Failed to fetch images" })

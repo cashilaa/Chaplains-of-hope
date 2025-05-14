@@ -27,6 +27,26 @@ export default function handler(req, res) {
     // Delete the file
     fs.unlinkSync(filePath)
 
+    // Also remove the file from metadata
+    const metadataPath = path.join(process.cwd(), "public/uploads/metadata.json")
+    if (fs.existsSync(metadataPath)) {
+      try {
+        const metadataContent = fs.readFileSync(metadataPath, "utf8")
+        const metadata = JSON.parse(metadataContent)
+        
+        // Remove the entry for this file
+        if (metadata[sanitizedFilename]) {
+          delete metadata[sanitizedFilename]
+          
+          // Save updated metadata
+          fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
+        }
+      } catch (err) {
+        console.error("Error updating metadata after deletion:", err)
+        // Continue even if metadata update fails
+      }
+    }
+
     console.log("File deleted:", sanitizedFilename)
 
     return res.status(200).json({ success: true, message: "Image deleted successfully" })
