@@ -159,7 +159,7 @@ export default function ProgramGallery() {
               <div className="relative h-48">
                 <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
                 <img
-                  src={`/uploads/${image.filename}`}
+                  src={`/api/serve-image?filename=${encodeURIComponent(image.filename)}`}
                   alt={image.description || "Gallery image"}
                   className="absolute inset-0 w-full h-full object-cover z-10 group-hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
@@ -196,7 +196,7 @@ export default function ProgramGallery() {
             <div className="relative">
               <div className="relative h-[60vh] bg-gray-100">
                 <img
-                  src={`/uploads/${selectedImage.filename}`}
+                  src={`/api/serve-image?filename=${encodeURIComponent(selectedImage.filename)}`}
                   alt={selectedImage.description || "Gallery image"}
                   className="w-full h-full object-contain"
                   onError={(e) => {

@@ -15,18 +15,24 @@ export default function handler(req, res) {
 
     console.log("Fetching images for program:", programId)
 
-    // Ensure uploads directory exists
-    const uploadsDir = path.join(process.cwd(), "public/uploads")
+    // Determine the uploads directory based on environment
+    // In production (Render.com), use the persistent disk path
+    // In development, use the local public/uploads directory
+    const isProduction = process.env.NODE_ENV === 'production'
+    const uploadsDir = isProduction 
+      ? '/opt/render/project/uploads' 
+      : path.join(process.cwd(), "public/uploads")
+    
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true })
-      console.log("Created uploads directory")
+      console.log("Created uploads directory at:", uploadsDir)
 
       // Return empty array if directory was just created
       return res.status(200).json({ images: [] })
     }
 
     // Path to metadata file
-    const metadataPath = path.join(process.cwd(), "public/uploads/metadata.json")
+    const metadataPath = path.join(uploadsDir, "metadata.json")
 
     // Load metadata if exists
     let metadata = {}

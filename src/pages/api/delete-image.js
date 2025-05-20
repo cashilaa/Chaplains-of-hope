@@ -16,8 +16,16 @@ export default function handler(req, res) {
     // Prevent path traversal attacks
     const sanitizedFilename = path.basename(filename)
 
+    // Determine the uploads directory based on environment
+    // In production (Render.com), use the persistent disk path
+    // In development, use the local public/uploads directory
+    const isProduction = process.env.NODE_ENV === 'production'
+    const uploadsDir = isProduction 
+      ? '/opt/render/project/uploads' 
+      : path.join(process.cwd(), "public/uploads")
+    
     // Path to the file
-    const filePath = path.join(process.cwd(), "public/uploads", sanitizedFilename)
+    const filePath = path.join(uploadsDir, sanitizedFilename)
 
     // Check if file exists
     if (!fs.existsSync(filePath)) {
@@ -28,7 +36,7 @@ export default function handler(req, res) {
     fs.unlinkSync(filePath)
 
     // Also remove the file from metadata
-    const metadataPath = path.join(process.cwd(), "public/uploads/metadata.json")
+    const metadataPath = path.join(uploadsDir, "metadata.json")
     if (fs.existsSync(metadataPath)) {
       try {
         const metadataContent = fs.readFileSync(metadataPath, "utf8")

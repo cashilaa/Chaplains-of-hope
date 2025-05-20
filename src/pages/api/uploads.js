@@ -15,10 +15,18 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Determine the uploads directory based on environment
+    // In production (Render.com), use the persistent disk path
+    // In development, use the local public/uploads directory
+    const isProduction = process.env.NODE_ENV === 'production'
+    const uploadsDir = isProduction 
+      ? '/opt/render/project/uploads' 
+      : path.join(process.cwd(), "public/uploads")
+    
     // Create uploads directory if it doesn't exist
-    const uploadsDir = path.join(process.cwd(), "public/uploads")
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true })
+      console.log("Created uploads directory at:", uploadsDir)
     }
 
     // Parse the form data
@@ -86,7 +94,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         success: true,
         filename: newFilename,
-        filepath: `/uploads/${newFilename}`,
+        filepath: `/api/serve-image?filename=${encodeURIComponent(newFilename)}`,
         description,
         programId,
       })
