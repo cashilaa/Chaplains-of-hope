@@ -23,7 +23,6 @@ export default function Home() {
     { label: "Programs", href: "/programs" },
     { label: "Membership", href: "/membership" },
     { label: "Donate", href: "/donations" },
-    { label: "News", href: "/news" },
     { label: "Contact Us", href: "/contact" },
   ]
 
@@ -232,7 +231,7 @@ export default function Home() {
         </section>
 
         {/* Impact Stats */}
-        <section className="py-20 bg-primary text-white">
+        <section className="py-20 bg-green-600 text-white">
           <div className="container mx-auto px-4">
             <AnimatedSection className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 inline-block relative">

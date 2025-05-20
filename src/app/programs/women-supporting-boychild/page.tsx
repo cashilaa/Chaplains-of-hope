@@ -79,7 +79,7 @@ export default function WomenSupportingBoychild() {
 
   return (
     <main className="flex-1 pt-16">
-      <title>Women Supporting the Boychild - Chaplains of Hope</title>
+      <title>Reintegration of the Boychild - Chaplains of Hope</title>
 
       <ParallaxHero
         backgroundImage="/placeholder.svg?height=800&width=1600"
@@ -103,7 +103,7 @@ export default function WomenSupportingBoychild() {
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <h1 className="text-4xl font-bold mb-6 text-gray-800 relative inline-block">
-              Women Supporting the Boychild
+              Reintegration of the Boychild
               <span className="absolute bottom-0 left-0 w-full h-1 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </h1>
             <p className="text-xl text-gray-700 mb-12 max-w-3xl">

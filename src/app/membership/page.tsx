@@ -19,7 +19,6 @@ export default function Membership() {
     { label: "Programs", href: "/programs" },
     { label: "Membership", href: "/membership" },
     { label: "Donate", href: "/donations" },
-    { label: "News", href: "/news" },
     { label: "Contact Us", href: "/contact" },
   ]
 
@@ -158,14 +157,14 @@ export default function Membership() {
         </section>
 
         {/* Join Now CTA */}
-        <section className="py-20 bg-primary text-white">
+        <section className="py-20 bg-green-600 text-white">
           <div className="container mx-auto px-4 text-center">
             <AnimatedSection>
               <h2 className="text-3xl font-bold mb-4">Ready to Make a Difference?</h2>
               <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
                 Join our community today and help us create positive change.
               </p>
-              <button className="bg-white text-primary py-4 px-8 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors shadow-lg">
+              <button className="bg-white text-green-600 py-4 px-8 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors shadow-lg">
                 Become a Member
               </button>
             </AnimatedSection>
