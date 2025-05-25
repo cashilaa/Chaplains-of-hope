@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
     // Check for the migration key (you should set this to something secure)
     const migrationKey = fields.migrationKey;
-    if (migrationKey !== 'rrvc5uvivrr6rvri6v6irviiri') {
+    if (migrationKey !== 'rrjvc5uvivrr6rvri6v6irviiri') {
       return res.status(403).json({ error: 'Invalid migration key' });
     }
 
