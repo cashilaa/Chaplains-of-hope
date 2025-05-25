@@ -6,10 +6,11 @@ import { useState, useRef } from "react"
 import { usePathname } from "next/navigation"
 
 export default function ImageUploadForm() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedImages, setSelectedImages] = useState<string[]>([])
   const [description, setDescription] = useState("")
   const [isUploading, setIsUploading] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [uploadResults, setUploadResults] = useState<any>(null)
   const [errorMessage, setErrorMessage] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -19,25 +20,46 @@ export default function ImageUploadForm() {
   const programId = segments[segments.length - 1] || ""
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
+    const files = event.target.files
+    if (!files || files.length === 0) return
+
+    // Clear previous selections
+    setSelectedImages([])
+    setUploadSuccess(false)
+    setErrorMessage("")
+
+    // Check each file
+    const validFiles: File[] = []
+    const fileReaders: FileReader[] = []
+    let hasError = false
+
+    Array.from(files).forEach(file => {
       // Check file size (limit to 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        setErrorMessage("File size exceeds 5MB limit")
-        if (fileInputRef.current) {
-          fileInputRef.current.value = ""
-        }
+        setErrorMessage("One or more files exceed the 5MB size limit")
+        hasError = true
         return
       }
+      validFiles.push(file)
+    })
 
+    if (hasError) {
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
+      return
+    }
+
+    // Create preview for each valid file
+    validFiles.forEach(file => {
       const reader = new FileReader()
+      fileReaders.push(reader)
+      
       reader.onloadend = () => {
-        setSelectedImage(reader.result as string)
+        setSelectedImages(prev => [...prev, reader.result as string])
       }
       reader.readAsDataURL(file)
-      setUploadSuccess(false)
-      setErrorMessage("")
-    }
+    })
   }
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -48,20 +70,26 @@ export default function ImageUploadForm() {
     event.preventDefault()
 
     if (!fileInputRef.current?.files?.length) {
-      setErrorMessage("Please select an image to upload")
+      setErrorMessage("Please select at least one image to upload")
       return
     }
 
     setIsUploading(true)
     setErrorMessage("")
+    setUploadResults(null)
 
     try {
       const formData = new FormData()
-      formData.append("file", fileInputRef.current.files[0])
+      
+      // Append all files
+      Array.from(fileInputRef.current.files).forEach(file => {
+        formData.append("files", file)
+      })
+      
       formData.append("description", description)
       formData.append("programId", programId)
 
-      console.log("Uploading to program:", programId)
+      console.log(`Uploading ${fileInputRef.current.files.length} images to program:`, programId)
 
       const response = await fetch("/api/uploads", {
         method: "POST",
@@ -78,7 +106,8 @@ export default function ImageUploadForm() {
       console.log("Upload successful:", result)
 
       setUploadSuccess(true)
-      setSelectedImage(null)
+      setUploadResults(result)
+      setSelectedImages([])
       setDescription("")
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
@@ -87,8 +116,8 @@ export default function ImageUploadForm() {
       // Trigger a refresh of the gallery if needed
       window.dispatchEvent(new CustomEvent("imageUploaded"))
     } catch (error) {
-      console.error("Error uploading image:", error)
-      setErrorMessage(error instanceof Error ? error.message : "Failed to upload image. Please try again.")
+      console.error("Error uploading images:", error)
+      setErrorMessage(error instanceof Error ? error.message : "Failed to upload images. Please try again.")
     } finally {
       setIsUploading(false)
     }
@@ -98,7 +127,7 @@ export default function ImageUploadForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <label htmlFor="image-upload" className="block text-sm font-medium text-gray-700">
-          Upload an Image
+          Upload Images
         </label>
         <input
           id="image-upload"
@@ -106,31 +135,37 @@ export default function ImageUploadForm() {
           accept="image/*"
           onChange={handleImageChange}
           ref={fileInputRef}
+          multiple
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
         />
-        <p className="text-xs text-gray-500">Maximum file size: 5MB. Supported formats: JPG, PNG, GIF.</p>
+        <p className="text-xs text-gray-500">Maximum file size: 5MB per image. Supported formats: JPG, PNG, GIF.</p>
       </div>
 
-      {selectedImage && (
+      {selectedImages.length > 0 && (
         <div className="space-y-2">
-          <p className="text-sm font-medium text-gray-700">Preview:</p>
-          <img
-            src={selectedImage || "/placeholder.svg"}
-            alt="Preview"
-            className="max-w-full h-auto max-h-64 rounded-lg border border-gray-200"
-          />
+          <p className="text-sm font-medium text-gray-700">Preview ({selectedImages.length} images):</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {selectedImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Preview ${index + 1}`}
+                className="w-full h-32 object-cover rounded-lg border border-gray-200"
+              />
+            ))}
+          </div>
         </div>
       )}
 
       <div className="space-y-2">
         <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-          Description
+          Description (applies to all images)
         </label>
         <textarea
           id="description"
           value={description}
           onChange={handleDescriptionChange}
-          placeholder="Add a description for this image..."
+          placeholder="Add a description for these images..."
           rows={3}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
         />
@@ -142,7 +177,12 @@ export default function ImageUploadForm() {
 
       {uploadSuccess && (
         <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
-          Image uploaded successfully!
+          <p className="font-medium">Upload successful!</p>
+          {uploadResults && (
+            <p className="mt-1">
+              {uploadResults.successfulUploads} of {uploadResults.totalFiles} images uploaded successfully.
+            </p>
+          )}
         </div>
       )}
 
@@ -171,7 +211,7 @@ export default function ImageUploadForm() {
             Uploading...
           </span>
         ) : (
-          "Upload Image"
+          "Upload Images"
         )}
       </button>
     </form>

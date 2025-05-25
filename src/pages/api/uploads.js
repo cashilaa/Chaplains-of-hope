@@ -34,33 +34,29 @@ export default async function handler(req, res) {
       uploadDir: uploadsDir,
       keepExtensions: true,
       maxFileSize: 10 * 1024 * 1024, // 10MB
+      multiples: true, // Enable multiple file uploads
     })
 
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
       if (err) {
         console.error("Error parsing form:", err)
         return res.status(500).json({ error: "Failed to process upload" })
       }
 
-      const file = files.file
-      if (!file) {
-        return res.status(400).json({ error: "No file uploaded" })
+      // Handle both single and multiple file uploads
+      const fileArray = files.files ? 
+        (Array.isArray(files.files) ? files.files : [files.files]) : 
+        (files.file ? (Array.isArray(files.file) ? files.file : [files.file]) : []);
+
+      if (fileArray.length === 0) {
+        return res.status(400).json({ error: "No files uploaded" })
       }
-
-      // Get file information
-      const originalFilename = file.originalFilename || "unknown"
-      const newFilename = `${Date.now()}-${originalFilename.replace(/\s+/g, "-")}`
-      const oldPath = file.filepath
-      const newPath = path.join(uploadsDir, newFilename)
-
-      // Rename the file to include timestamp
-      fs.renameSync(oldPath, newPath)
 
       // Get program ID and description from form fields
       const programId = fields.programId || "unknown"
       const description = fields.description || ""
 
-      // Save metadata
+      // Load metadata
       const metadataPath = path.join(uploadsDir, "metadata.json")
       let metadata = {}
 
@@ -75,33 +71,63 @@ export default async function handler(req, res) {
         }
       }
 
-      // Add new file metadata
-      metadata[newFilename] = {
-        programId,
-        description,
-        uploadDate: new Date().toISOString(),
-      }
+      // Process each file
+      const uploadResults = fileArray.map((file) => {
+        try {
+          // Get file information
+          const originalFilename = file.originalFilename || "unknown"
+          const newFilename = `${Date.now()}-${originalFilename.replace(/\s+/g, "-")}`
+          const oldPath = file.filepath
+          const newPath = path.join(uploadsDir, newFilename)
+
+          // Rename the file to include timestamp
+          fs.renameSync(oldPath, newPath)
+
+          // Add new file metadata
+          metadata[newFilename] = {
+            programId,
+            description,
+            uploadDate: new Date().toISOString(),
+          }
+
+          console.log("File uploaded:", {
+            filename: newFilename,
+            programId,
+            description,
+          })
+
+          return {
+            success: true,
+            filename: newFilename,
+            filepath: `/api/serve-image?filename=${encodeURIComponent(newFilename)}`,
+            originalFilename: originalFilename,
+          }
+        } catch (error) {
+          console.error("Error processing file:", error)
+          return {
+            success: false,
+            originalFilename: file.originalFilename || "unknown",
+            error: error.message,
+          }
+        }
+      })
 
       // Save updated metadata
       fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
 
-      console.log("File uploaded:", {
-        filename: newFilename,
-        programId,
-        description,
-      })
-
       return res.status(200).json({
         success: true,
-        filename: newFilename,
-        filepath: `/api/serve-image?filename=${encodeURIComponent(newFilename)}`,
+        totalFiles: fileArray.length,
+        successfulUploads: uploadResults.filter(r => r.success).length,
+        failedUploads: uploadResults.filter(r => !r.success).length,
+        files: uploadResults,
         description,
         programId,
       })
     })
   } catch (error) {
     console.error("Error handling upload:", error)
-    return res.status(500).json({ error: "Failed to upload file" })
+    return res.status(500).json({ error: "Failed to upload files" })
   }
 }
 
