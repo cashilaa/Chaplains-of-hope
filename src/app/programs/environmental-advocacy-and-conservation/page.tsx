@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, Leaf, TreePine, Droplets, FileText, Cloud, Users, ChevronRight } from "lucide-react"
+import { ArrowLeft, Leaf, TreePine, Droplets, FileText, Cloud, Users, ChevronRight, Recycle } from "lucide-react"
 import ImageUploadForm from "@/app/components/image-upload-form"
 import { AnimatedSection } from "../../../components/ui/animated-section"
 import { ParallaxHero } from "../../../components/ui/parallax-hero"
@@ -57,21 +57,21 @@ export default function EnvironmentalAdvocacyAndConservation() {
       description:
         "Our annual tree planting initiative aims to restore degraded landscapes and increase forest cover in urban and rural areas.",
       impact: "10,000+ trees planted across 5 counties",
-      image: "/tree-new.jpeg?height=300&width=400",
+      icon: <TreePine className="h-12 w-12 text-green-600" />,
     },
     {
       title: "Clean Water Project",
       description:
         "Working to protect water sources, reduce pollution, and ensure communities have access to clean, safe water.",
       impact: "15 water sources protected, benefiting 5,000+ people",
-      image: "/water-new.jpeg?height=300&width=400",
+      icon: <Droplets className="h-12 w-12 text-green-600" />,
     },
     {
       title: "Waste Management Program",
       description:
         "Implementing community-based waste collection, segregation, and recycling systems to reduce environmental pollution.",
       impact: "50% reduction in improper waste disposal in target communities",
-      image: "/download-new.jpeg?height=300&width=400",
+      icon: <Recycle className="h-12 w-12 text-green-600" />,
     },
   ]
 
@@ -177,17 +177,14 @@ export default function EnvironmentalAdvocacyAndConservation() {
               {activeTab === "initiatives" ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {initiatives.map((initiative, index) => (
-                    <CardHover key={index} className="bg-white rounded-xl overflow-hidden border border-gray-100">
-                      <div className="relative h-48">
-                        <Image
-                          src={initiative.image || "/placeholder.svg"}
-                          alt={initiative.title}
-                          fill
-                          className="object-cover"
-                        />
+                    <CardHover key={index} className="bg-white rounded-xl border border-gray-100 p-6">
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-green-50 p-4 rounded-full">
+                          {initiative.icon}
+                        </div>
                       </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-semibold mb-2 text-gray-800">{initiative.title}</h3>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">{initiative.title}</h3>
                         <p className="text-gray-600 mb-4 text-sm">{initiative.description}</p>
                         <div className="bg-green-50 text-green-700 px-3 py-2 rounded-lg text-sm font-medium inline-block">
                           {initiative.impact}
