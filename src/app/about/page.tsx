@@ -28,7 +28,7 @@ export default function About() {
     {
       name: "Stephen muthiora kuria",
       role: "Convinor chaplins of Hope Social Justice Center -Dagoretti",
-      bio: "John has over 20 years of experience in community service...",
+      bio: "Chaplain Stephen Muthiora Kuria is a visionary faith-based leader and community advocate based in Kenya. He leads efforts through Chaplains of Hope cbo and HopeLine Child Tracing Kenya, focusing on chaplaincy services, psychosocial support, and tracing missing children. Stephen combines his deep spiritual conviction with practical strategies to empower vulnerable populations, especially children and uniformed personnel.\n\nDriven by the belief that collaboration uplifts everyone, Stephen’s work exemplifies the motto, “You don’t have to put out my light for yours to shine.” He continues to build networks of hope, justice, and healing across communities, training leaders and mobilizing resources to create lasting impact.",
       image: "/muthiora.jpg",
     },
     {

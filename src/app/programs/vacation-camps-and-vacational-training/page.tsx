@@ -73,7 +73,7 @@ export default function VacationCampsAndVocationalTraining() {
 
   return (
     <main className="flex-1 pt-16">
-      <title>Vacation Camps & Vocational Training - Chaplains of Hope</title>
+      <title>OutDoor Activities - Chaplains of Hope</title>
 
       <ParallaxHero
         backgroundImage="/placeholder.svg?height=800&width=1600"
@@ -97,7 +97,7 @@ export default function VacationCampsAndVocationalTraining() {
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <h1 className="text-4xl font-bold mb-6 text-gray-800 relative inline-block">
-              Vacation Camps & Vocational Training
+              OutDoor Activities
               <span className="absolute bottom-0 left-0 w-full h-1 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </h1>
             <p className="text-xl text-gray-700 mb-12 max-w-3xl">
