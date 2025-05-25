@@ -59,7 +59,7 @@ export default function Programs() {
       featured: false,
     },
     {
-      title: "Vacation Camps & Vocational Training",
+      title: "OutDoor Activities",
       description:
         "Adventure with relaxation of minds, uniting the society, and equipping individuals with skills to secure employment and rebuild their lives.",
       image: "/fun.jpg",
