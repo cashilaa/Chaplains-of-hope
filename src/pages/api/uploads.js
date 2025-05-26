@@ -1,6 +1,7 @@
 import formidable from "formidable"
 import path from "path"
 import fs from "fs"
+import cloudinary, { isCloudinaryConfigured } from "../../lib/cloudinary"
 
 // Disable the default body parser to handle form data
 export const config = {
@@ -14,24 +15,23 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
+  // Check if Cloudinary is properly configured
+  if (!isCloudinaryConfigured()) {
+    return res.status(500).json({ 
+      error: "Cloudinary is not properly configured. Please set up your environment variables." 
+    })
+  }
+
   try {
-    // Determine the uploads directory based on environment
-    // In production (Render.com), use the persistent disk path
-    // In development, use the local public/uploads directory
-    const isProduction = process.env.NODE_ENV === 'production'
-    const uploadsDir = isProduction 
-      ? '/opt/render/project/uploads' 
-      : path.join(process.cwd(), "public/uploads")
-    
-    // Create uploads directory if it doesn't exist
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true })
-      console.log("Created uploads directory at:", uploadsDir)
+    // Create a temporary directory for file processing
+    const tempDir = path.join(process.cwd(), "tmp")
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true })
     }
 
     // Parse the form data
     const form = new formidable.IncomingForm({
-      uploadDir: uploadsDir,
+      uploadDir: tempDir,
       keepExtensions: true,
       maxFileSize: 10 * 1024 * 1024, // 10MB
       multiples: true, // Enable multiple file uploads
@@ -56,41 +56,28 @@ export default async function handler(req, res) {
       const programId = fields.programId || "unknown"
       const description = fields.description || ""
 
-      // Load metadata
-      const metadataPath = path.join(uploadsDir, "metadata.json")
-      let metadata = {}
-
-      // Load existing metadata if it exists
-      if (fs.existsSync(metadataPath)) {
-        try {
-          const metadataContent = fs.readFileSync(metadataPath, "utf8")
-          metadata = JSON.parse(metadataContent)
-        } catch (err) {
-          console.error("Error reading metadata:", err)
-          // Continue with empty metadata if file is corrupted
-        }
-      }
-
       // Process each file
-      const uploadResults = fileArray.map((file) => {
+      const uploadPromises = fileArray.map(async (file) => {
         try {
           // Get file information
           const originalFilename = file.originalFilename || "unknown"
-          const newFilename = `${Date.now()}-${originalFilename.replace(/\s+/g, "-")}`
-          const oldPath = file.filepath
-          const newPath = path.join(uploadsDir, newFilename)
+          const timestamp = Date.now()
+          const newFilename = `${timestamp}-${originalFilename.replace(/\s+/g, "-")}`
+          const filePath = file.filepath
+          
+          // Upload to Cloudinary
+          const uploadResult = await cloudinary.uploader.upload(filePath, {
+            folder: programId,
+            public_id: newFilename.substring(0, newFilename.lastIndexOf('.')), // Remove extension for public_id
+            resource_type: "auto",
+            context: `description=${description}|programId=${programId}|originalFilename=${originalFilename}`,
+            overwrite: false
+          });
 
-          // Rename the file to include timestamp
-          fs.renameSync(oldPath, newPath)
+          // Clean up the temporary file
+          fs.unlinkSync(filePath)
 
-          // Add new file metadata
-          metadata[newFilename] = {
-            programId,
-            description,
-            uploadDate: new Date().toISOString(),
-          }
-
-          console.log("File uploaded:", {
+          console.log("File uploaded to Cloudinary:", {
             filename: newFilename,
             programId,
             description,
@@ -99,8 +86,12 @@ export default async function handler(req, res) {
           return {
             success: true,
             filename: newFilename,
-            filepath: `/api/serve-image?filename=${encodeURIComponent(newFilename)}`,
+            filepath: uploadResult.secure_url,
             originalFilename: originalFilename,
+            cloudinaryPublicId: uploadResult.public_id,
+            width: uploadResult.width,
+            height: uploadResult.height,
+            format: uploadResult.format
           }
         } catch (error) {
           console.error("Error processing file:", error)
@@ -112,8 +103,8 @@ export default async function handler(req, res) {
         }
       })
 
-      // Save updated metadata
-      fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
+      // Wait for all uploads to complete
+      const uploadResults = await Promise.all(uploadPromises)
 
       return res.status(200).json({
         success: true,

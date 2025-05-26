@@ -8,9 +8,11 @@ import { X, Trash2, AlertCircle } from "lucide-react"
 interface ImageItem {
   id: number
   filename: string
+  filepath: string
   description: string
   programId: string
   uploadDate: string
+  cloudinaryPublicId?: string
 }
 
 export default function ProgramGallery() {
@@ -79,12 +81,17 @@ export default function ProgramGallery() {
     document.body.style.overflow = "auto"
   }
 
-  const deleteImage = async (filename: string) => {
+  const deleteImage = async (image: ImageItem) => {
     try {
       setIsDeleting(true)
       setDeleteError("")
 
-      const response = await fetch(`/api/delete-image?filename=${encodeURIComponent(filename)}`, {
+      // Use publicId if available, otherwise fall back to filename
+      const queryParam = image.cloudinaryPublicId 
+        ? `publicId=${encodeURIComponent(image.cloudinaryPublicId)}`
+        : `filename=${encodeURIComponent(image.filename)}`
+      
+      const response = await fetch(`/api/delete-image?${queryParam}`, {
         method: "DELETE",
       })
 
@@ -159,7 +166,7 @@ export default function ProgramGallery() {
               <div className="relative h-48">
                 <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
                 <img
-                  src={`/api/serve-image?filename=${encodeURIComponent(image.filename)}`}
+                  src={image.filepath || `/api/serve-image?filename=${encodeURIComponent(image.filename)}`}
                   alt={image.description || "Gallery image"}
                   className="absolute inset-0 w-full h-full object-cover z-10 group-hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
@@ -196,7 +203,7 @@ export default function ProgramGallery() {
             <div className="relative">
               <div className="relative h-[60vh] bg-gray-100">
                 <img
-                  src={`/api/serve-image?filename=${encodeURIComponent(selectedImage.filename)}`}
+                  src={selectedImage.filepath || `/api/serve-image?filename=${encodeURIComponent(selectedImage.filename)}`}
                   alt={selectedImage.description || "Gallery image"}
                   className="w-full h-full object-contain"
                   onError={(e) => {
@@ -269,7 +276,7 @@ export default function ProgramGallery() {
                   </button>
                   <button
                     className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors flex items-center"
-                    onClick={() => deleteImage(selectedImage.filename)}
+                    onClick={() => deleteImage(selectedImage)}
                     disabled={isDeleting}
                   >
                     {isDeleting ? (

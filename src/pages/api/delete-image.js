@@ -1,66 +1,58 @@
-import fs from "fs"
-import path from "path"
+import cloudinary, { isCloudinaryConfigured } from "../../lib/cloudinary"
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "DELETE") {
     return res.status(405).json({ error: "Method not allowed" })
   }
 
+  // Check if Cloudinary is properly configured
+  if (!isCloudinaryConfigured()) {
+    return res.status(500).json({ 
+      error: "Cloudinary is not properly configured. Please set up your environment variables." 
+    })
+  }
+
   try {
-    const { filename } = req.query
+    const { publicId, filename } = req.query
 
-    if (!filename) {
-      return res.status(400).json({ error: "Filename is required" })
+    if (!publicId && !filename) {
+      return res.status(400).json({ error: "publicId or filename is required" })
     }
 
-    // Prevent path traversal attacks
-    const sanitizedFilename = path.basename(filename)
+    let publicIdToDelete;
 
-    // Determine the uploads directory based on environment
-    // In production (Render.com), use the persistent disk path
-    // In development, use the local public/uploads directory
-    const isProduction = process.env.NODE_ENV === 'production'
-    const uploadsDir = isProduction 
-      ? '/opt/render/project/uploads' 
-      : path.join(process.cwd(), "public/uploads")
-    
-    // Path to the file
-    const filePath = path.join(uploadsDir, sanitizedFilename)
-
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: "File not found" })
-    }
-
-    // Delete the file
-    fs.unlinkSync(filePath)
-
-    // Also remove the file from metadata
-    const metadataPath = path.join(uploadsDir, "metadata.json")
-    if (fs.existsSync(metadataPath)) {
-      try {
-        const metadataContent = fs.readFileSync(metadataPath, "utf8")
-        const metadata = JSON.parse(metadataContent)
-        
-        // Remove the entry for this file
-        if (metadata[sanitizedFilename]) {
-          delete metadata[sanitizedFilename]
-          
-          // Save updated metadata
-          fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2))
-        }
-      } catch (err) {
-        console.error("Error updating metadata after deletion:", err)
-        // Continue even if metadata update fails
+    if (publicId) {
+      // If a public ID is provided, use it directly
+      publicIdToDelete = publicId;
+    } else {
+      // For backward compatibility - search for the file by name
+      // This is less efficient but maintains compatibility with existing code
+      const result = await cloudinary.search
+        .expression(`filename:${filename}`)
+        .max_results(1)
+        .execute();
+      
+      if (!result || !result.resources || result.resources.length === 0) {
+        return res.status(404).json({ error: "File not found" });
       }
+      
+      publicIdToDelete = result.resources[0].public_id;
     }
 
-    console.log("File deleted:", sanitizedFilename)
+    // Delete the file from Cloudinary
+    const deleteResult = await cloudinary.uploader.destroy(publicIdToDelete);
 
-    return res.status(200).json({ success: true, message: "Image deleted successfully" })
+    if (deleteResult.result !== 'ok') {
+      console.error("Error deleting from Cloudinary:", deleteResult);
+      return res.status(500).json({ error: "Failed to delete image", details: deleteResult });
+    }
+
+    console.log("File deleted from Cloudinary:", publicIdToDelete);
+
+    return res.status(200).json({ success: true, message: "Image deleted successfully" });
   } catch (error) {
-    console.error("Error deleting image:", error)
-    return res.status(500).json({ error: "Failed to delete image" })
+    console.error("Error deleting image:", error);
+    return res.status(500).json({ error: "Failed to delete image" });
   }
 }
 
