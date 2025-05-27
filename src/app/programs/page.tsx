@@ -63,7 +63,7 @@ export default function Programs() {
       description:
         "Adventure with relaxation of minds, uniting the society, and equipping individuals with skills to secure employment and rebuild their lives.",
       image: "/fun.jpg",
-      link: "/programs/vacation-camps-and-vocational-training",
+      link: "/programs/vacation-camps-and-vacational-training",
       category: "education",
       featured: true,
     },

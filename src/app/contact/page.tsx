@@ -28,7 +28,6 @@ export default function Contact() {
     { label: "Programs", href: "/programs" },
     { label: "Membership", href: "/membership" },
     { label: "Donate", href: "/donations" },
-    { label: "News", href: "/news" },
     { label: "Contact Us", href: "/contact" },
   ]
 
